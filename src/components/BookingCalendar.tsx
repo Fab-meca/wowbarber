@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isWeekend, isBefore, startOfToday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useBlockedSlots } from '@/hooks/useBlockedSlots';
 
 interface BookingCalendarProps {
   selectedDate: Date | null;
@@ -26,6 +27,7 @@ const BookingCalendar = ({
 }: BookingCalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const today = startOfToday();
+  const { getBlockedSlotsForDate } = useBlockedSlots();
 
   const days = useMemo(() => {
     const start = startOfMonth(currentMonth);
@@ -40,6 +42,14 @@ const BookingCalendar = ({
   };
 
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+  // Get blocked slots for the selected date
+  const blockedSlots = selectedDate 
+    ? getBlockedSlotsForDate(format(selectedDate, 'yyyy-MM-dd'))
+    : [];
+
+  // Combine booked and blocked slots
+  const unavailableSlots = [...new Set([...bookedSlots, ...blockedSlots])];
 
   return (
     <div className="grid md:grid-cols-2 gap-8">
@@ -126,17 +136,17 @@ const BookingCalendar = ({
         {selectedDate ? (
           <div className="grid grid-cols-3 gap-3">
             {timeSlots.map((time) => {
-              const isBooked = bookedSlots.includes(time);
+              const isUnavailable = unavailableSlots.includes(time);
               const isSelected = selectedTime === time;
 
               return (
                 <button
                   key={time}
-                  onClick={() => !isBooked && onSelectTime(time)}
-                  disabled={isBooked}
+                  onClick={() => !isUnavailable && onSelectTime(time)}
+                  disabled={isUnavailable}
                   className={`
                     py-3 px-4 rounded-lg text-sm font-medium transition-all duration-200
-                    ${isBooked 
+                    ${isUnavailable 
                       ? 'bg-muted/50 text-muted-foreground/50 cursor-not-allowed line-through' 
                       : isSelected
                         ? 'bg-gold text-carbon font-bold'
