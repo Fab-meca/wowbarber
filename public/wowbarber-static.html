@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WowBarber</title>
+  <meta name="description" content="Barbearia premium com cortes modernos e atendimento de excelência. Agende seu horário!">
+  <meta property="og:title" content="WowBarber - Barbearia Premium">
+  <meta property="og:description" content="Cortes modernos e atendimento de excelência">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #facc15;
+      --gold-dark: #eab308;
+      --carbon: #0a0a0a;
+      --carbon-light: #121212;
+      --carbon-lighter: #1f1f1f;
+      --text-primary: #fef3c7;
+      --text-muted: #9ca3af;
+      --border: #2d2d2d;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--carbon);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    .header.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.75rem;
+    }
+
+    .logo-text span:first-child {
+      color: var(--text-primary);
+    }
+
+    .logo-text span:last-child {
+      color: var(--gold);
+    }
+
+    .nav {
+      display: none;
+      gap: 2rem;
+    }
+
+    .nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: var(--gold);
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-menu-btn span {
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--carbon-light);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 1rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--gold);
+    }
+
+    @media (min-width: 768px) {
+      .nav {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.08) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 .gold {
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--carbon);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      box-shadow: 0 0 30px rgba(250, 204, 21, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: rgba(250, 204, 21, 0.1);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Services */
+    .services {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 .gold {
+      color: var(--gold);
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--carbon-light);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(250, 204, 21, 0.5);
+    }
+
+    .service-card.featured {
+      background: rgba(250, 204, 21, 0.1);
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
+    }
+
+    .service-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--carbon);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 0.75rem;
+      background: rgba(250, 204, 21, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .service-card.featured .service-icon {
+      background: var(--gold);
+    }
+
+    .service-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--gold);
+    }
+
+    .service-card.featured .service-icon svg {
+      stroke: var(--carbon);
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card > p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      min-height: 40px;
+    }
+
+    .service-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .service-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .service-duration {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Booking */
+    .booking {
+      padding: 5rem 0;
+      background: var(--carbon-light);
+    }
+
+    .booking-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--carbon);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .booking-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .booking-header h3 {
+      font-size: 1.5rem;
+    }
+
+    .booking-content {
+      padding: 1.5rem;
+    }
+
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .calendar-nav button {
+      background: var(--carbon-lighter);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .calendar-nav button:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .calendar-nav button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .calendar-month {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+    }
+
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .calendar-weekdays span {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.5rem;
+    }
+
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--carbon-lighter);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .calendar-day:hover:not(.disabled):not(.empty) {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .calendar-day.selected {
+      background: var(--gold);
+      color: var(--carbon);
+      border-color: var(--gold);
+    }
+
+    .calendar-day.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .calendar-day.empty {
+      background: transparent;
+      border-color: transparent;
+      cursor: default;
+    }
+
+    .calendar-day.today {
+      border-color: var(--gold);
+    }
+
+    .time-slots {
+      margin-top: 1.5rem;
+    }
+
+    .time-slots h4 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+    }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .time-slot {
+      padding: 0.75rem;
+      background: var(--carbon-lighter);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.875rem;
+    }
+
+    .time-slot:hover:not(.disabled) {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .time-slot.selected {
+      background: var(--gold);
+      color: var(--carbon);
+      border-color: var(--gold);
+    }
+
+    .time-slot.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    /* Booking Form */
+    .booking-form {
+      display: none;
+    }
+
+    .booking-form.active {
+      display: block;
+    }
+
+    .booking-summary {
+      background: var(--carbon-lighter);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .summary-item {
+      flex: 1;
+      text-align: center;
+    }
+
+    .summary-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--carbon-lighter);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-buttons .btn {
+      flex: 1;
+    }
+
+    /* Success */
+    .booking-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .booking-success.active {
+      display: block;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: #22c55e;
+    }
+
+    .booking-success h3 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-success p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 5rem 0;
+    }
+
+    .testimonial-carousel {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .testimonial-card {
+      background: var(--carbon-light);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      display: none;
+    }
+
+    .testimonial-card.active {
+      display: block;
+    }
+
+    .testimonial-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--carbon-lighter);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .testimonial-stars {
+      display: flex;
+      justify-content: center;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-stars svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--gold);
+      stroke: var(--gold);
+    }
+
+    .testimonial-content {
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .testimonial-nav button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--carbon-lighter);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .testimonial-nav button:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .testimonial-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .testimonial-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .testimonial-dot.active {
+      background: var(--gold);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Contact */
+    .contact {
+      padding: 5rem 0;
+      background: var(--carbon-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-map {
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 300px;
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(100%) invert(92%) contrast(83%);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 0.75rem;
+      background: rgba(250, 204, 21, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--gold);
+    }
+
+    .contact-text h4 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-text p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .contact-text a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .contact-text a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--carbon-lighter);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--gold);
+      color: var(--carbon);
+    }
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .footer-copyright {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Admin */
+    .admin-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-overlay.active {
+      display: flex;
+    }
+
+    .admin-modal {
+      background: var(--carbon-light);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .admin-modal h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .admin-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Hidden elements */
+    .hidden {
+      display: none !important;
+    }
+
+    .calendar-view, .form-view, .success-view {
+      display: none;
+    }
+
+    .calendar-view.active, .form-view.active, .success-view.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+          </div>
+          <span class="logo-text"><span>WOW</span><span>BARBER</span></span>
+        </a>
+        <nav class="nav">
+          <a href="#servicos">Serviços</a>
+          <a href="#agendamento">Agendar</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#servicos">Serviços</a>
+      <a href="#agendamento">Agendar</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Barbearia Premium
+      </div>
+      <h1><span class="gold">WOW</span>BARBER</h1>
+      <p>Transforme seu visual com cortes modernos e atendimento de excelência. Agende agora e experimente o melhor da barbearia.</p>
+      <div class="hero-buttons">
+        <a href="#agendamento" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          Agendar Agora
+        </a>
+        <a href="#servicos" class="btn btn-outline">Ver Serviços</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">10+</div>
+          <div class="stat-label">Anos de Experiência</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5K+</div>
+          <div class="stat-label">Clientes Satisfeitos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4.9</div>
+          <div class="stat-label">Avaliação Google</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="servicos">
+    <div class="container">
+      <div class="section-header">
+        <h2>NOSSOS <span class="gold">SERVIÇOS</span></h2>
+        <p>Serviços premium com os melhores produtos e técnicas do mercado</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+          </div>
+          <h3>Corte Masculino</h3>
+          <p>Corte personalizado com acabamento perfeito e produtos premium.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 45</span>
+            <span class="service-duration">45 min</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+          </div>
+          <h3>Barba Completa</h3>
+          <p>Modelagem e alinhamento com navalha e toalha quente.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 35</span>
+            <span class="service-duration">30 min</span>
+          </div>
+        </div>
+        <div class="service-card featured">
+          <span class="service-badge">Mais Popular</span>
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          </div>
+          <h3>Combo Premium</h3>
+          <p>Corte + Barba + Sobrancelha com hidratação facial.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 85</span>
+            <span class="service-duration">1h 15min</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Sobrancelha</h3>
+          <p>Design e alinhamento profissional das sobrancelhas.</p>
+          <div class="service-footer">
+            <span class="service-price">R$ 20</span>
+            <span class="service-duration">15 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="booking" id="agendamento">
+    <div class="container">
+      <div class="section-header">
+        <h2>AGENDE SEU <span class="gold">HORÁRIO</span></h2>
+        <p>Escolha a data e horário que melhor se encaixa na sua agenda</p>
+      </div>
+      <div class="booking-container">
+        <div class="booking-header">
+          <h3>Selecione uma Data</h3>
+        </div>
+        <div class="booking-content">
+          <!-- Calendar View -->
+          <div class="calendar-view active" id="calendarView">
+            <div class="calendar-nav">
+              <button id="prevMonth">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <span class="calendar-month" id="calendarMonth"></span>
+              <button id="nextMonth">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+            <div class="calendar-weekdays">
+              <span>Dom</span>
+              <span>Seg</span>
+              <span>Ter</span>
+              <span>Qua</span>
+              <span>Qui</span>
+              <span>Sex</span>
+              <span>Sáb</span>
+            </div>
+            <div class="calendar-days" id="calendarDays"></div>
+            <div class="time-slots" id="timeSlots" style="display: none;">
+              <h4>Horários disponíveis para <span id="selectedDateText"></span></h4>
+              <div class="time-grid" id="timeGrid"></div>
+            </div>
+          </div>
+
+          <!-- Form View -->
+          <div class="form-view" id="formView">
+            <div class="booking-summary">
+              <div class="summary-item">
+                <div class="summary-label">Data</div>
+                <div class="summary-value" id="summaryDate"></div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Horário</div>
+                <div class="summary-value" id="summaryTime"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="clientName">Nome Completo</label>
+              <input type="text" id="clientName" placeholder="Seu nome">
+            </div>
+            <div class="form-group">
+              <label for="clientPhone">Telefone</label>
+              <input type="tel" id="clientPhone" placeholder="(11) 99999-9999">
+            </div>
+            <div class="form-buttons">
+              <button class="btn btn-outline" id="backToCalendar">Voltar</button>
+              <button class="btn btn-primary" id="confirmBooking">Confirmar</button>
+            </div>
+          </div>
+
+          <!-- Success View -->
+          <div class="success-view" id="successView">
+            <div class="success-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3>Agendamento Confirmado!</h3>
+            <p>Você receberá uma confirmação por WhatsApp.</p>
+            <button class="btn btn-primary" id="newBooking">Novo Agendamento</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="depoimentos">
+    <div class="container">
+      <div class="section-header">
+        <h2>O QUE DIZEM <span class="gold">NOSSOS CLIENTES</span></h2>
+        <p>Avaliações reais de quem confia no nosso trabalho</p>
+      </div>
+      <div class="testimonial-carousel">
+        <div class="testimonial-card active" data-index="0">
+          <div class="testimonial-avatar">RC</div>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-content">"Melhor barbearia da cidade! Atendimento impecável e o corte ficou exatamente como eu queria. Super recomendo!"</p>
+          <div class="testimonial-author">Ricardo Costa</div>
+          <div class="testimonial-role">Cliente há 2 anos</div>
+        </div>
+        <div class="testimonial-card" data-index="1">
+          <div class="testimonial-avatar">MS</div>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-content">"Ambiente top, profissionais qualificados e um café delicioso enquanto espera. Virei cliente fiel!"</p>
+          <div class="testimonial-author">Marcos Silva</div>
+          <div class="testimonial-role">Cliente há 1 ano</div>
+        </div>
+        <div class="testimonial-card" data-index="2">
+          <div class="testimonial-avatar">PO</div>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-content">"O combo premium vale cada centavo! A hidratação facial é um diferencial incrível. Saio de lá renovado."</p>
+          <div class="testimonial-author">Pedro Oliveira</div>
+          <div class="testimonial-role">Cliente há 6 meses</div>
+        </div>
+      </div>
+      <div class="testimonial-nav">
+        <button id="prevTestimonial">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button id="nextTestimonial">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="testimonial-dots" id="testimonialDots"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="section-header">
+        <h2>ONDE <span class="gold">ESTAMOS</span></h2>
+        <p>Venha nos visitar ou entre em contato</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975795987713!2d-46.65512368502264!3d-23.56509118468095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0x63b71a9c5b8bfbe6!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1621436289345!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-text">
+              <h4>Endereço</h4>
+              <p>Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP, 01310-100</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="contact-text">
+              <h4>Horário de Funcionamento</h4>
+              <p>Segunda a Sexta: 08:00 - 18:00<br>Sábado e Domingo: Fechado</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-text">
+              <h4>Telefone</h4>
+              <p><a href="tel:+5511999999999">(11) 99999-9999</a></p>
+            </div>
+          </div>
+          <div class="contact-buttons">
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              WhatsApp
+            </a>
+            <a href="https://instagram.com/wowbarber" target="_blank" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <a href="#" class="logo">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+          </div>
+          <span class="logo-text"><span>WOW</span><span>BARBER</span></span>
+        </a>
+        <div class="social-links">
+          <a href="https://instagram.com/wowbarber" target="_blank" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/5511999999999" target="_blank" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a href="mailto:contato@wowbarber.com" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+        <p class="footer-copyright">© 2025 WowBarber. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu
+    var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var header = document.getElementById('header');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    var mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Calendar Logic
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth();
+    var currentYear = currentDate.getFullYear();
+    var selectedDate = null;
+    var selectedTime = null;
+
+    var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
+                  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+    var timeSlots = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', 
+                     '14:00', '15:00', '16:00', '17:00', '18:00'];
+
+    function getBookings() {
+      var stored = localStorage.getItem('wowbarber_bookings');
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveBooking(booking) {
+      var bookings = getBookings();
+      bookings.push(booking);
+      localStorage.setItem('wowbarber_bookings', JSON.stringify(bookings));
+    }
+
+    function isSlotBooked(dateStr, time) {
+      var bookings = getBookings();
+      return bookings.some(function(b) {
+        return b.date === dateStr && b.time === time;
+      });
+    }
+
+    function formatDate(date) {
+      var day = String(date.getDate()).padStart(2, '0');
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var year = date.getFullYear();
+      return day + '/' + month + '/' + year;
+    }
+
+    function formatDateKey(date) {
+      var day = String(date.getDate()).padStart(2, '0');
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var year = date.getFullYear();
+      return year + '-' + month + '-' + day;
+    }
+
+    function renderCalendar() {
+      var calendarMonth = document.getElementById('calendarMonth');
+      var calendarDays = document.getElementById('calendarDays');
+      
+      calendarMonth.textContent = months[currentMonth] + ' ' + currentYear;
+      
+      var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      
+      var html = '';
+      
+      // Empty cells for days before first day of month
+      for (var i = 0; i < firstDay; i++) {
+        html += '<div class="calendar-day empty"></div>';
+      }
+      
+      // Days of month
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      for (var day = 1; day <= daysInMonth; day++) {
+        var date = new Date(currentYear, currentMonth, day);
+        var dayOfWeek = date.getDay();
+        var isPast = date < today;
+        var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+        var isDisabled = isPast || isWeekend;
+        var isToday = date.getTime() === today.getTime();
+        var isSelected = selectedDate && date.getTime() === selectedDate.getTime();
+        
+        var classes = 'calendar-day';
+        if (isDisabled) classes += ' disabled';
+        if (isToday) classes += ' today';
+        if (isSelected) classes += ' selected';
+        
+        html += '<div class="' + classes + '" data-day="' + day + '">' + day + '</div>';
+      }
+      
+      calendarDays.innerHTML = html;
+      
+      // Add click events
+      var dayElements = calendarDays.querySelectorAll('.calendar-day:not(.disabled):not(.empty)');
+      dayElements.forEach(function(el) {
+        el.addEventListener('click', function() {
+          var day = parseInt(this.getAttribute('data-day'));
+          selectDate(new Date(currentYear, currentMonth, day));
+        });
+      });
+      
+      // Update prev button state
+      var prevBtn = document.getElementById('prevMonth');
+      var isCurrentMonth = currentMonth === today.getMonth() && currentYear === today.getFullYear();
+      prevBtn.disabled = isCurrentMonth;
+    }
+
+    function selectDate(date) {
+      selectedDate = date;
+      selectedTime = null;
+      renderCalendar();
+      renderTimeSlots();
+    }
+
+    function renderTimeSlots() {
+      var timeSlotsContainer = document.getElementById('timeSlots');
+      var timeGrid = document.getElementById('timeGrid');
+      var selectedDateText = document.getElementById('selectedDateText');
+      
+      if (!selectedDate) {
+        timeSlotsContainer.style.display = 'none';
+        return;
+      }
+      
+      timeSlotsContainer.style.display = 'block';
+      selectedDateText.textContent = formatDate(selectedDate);
+      
+      var dateKey = formatDateKey(selectedDate);
+      var html = '';
+      
+      timeSlots.forEach(function(time) {
+        var isBooked = isSlotBooked(dateKey, time);
+        var isSelected = selectedTime === time;
+        
+        var classes = 'time-slot';
+        if (isBooked) classes += ' disabled';
+        if (isSelected) classes += ' selected';
+        
+        html += '<div class="' + classes + '" data-time="' + time + '">' + time + '</div>';
+      });
+      
+      timeGrid.innerHTML = html;
+      
+      // Add click events
+      var slotElements = timeGrid.querySelectorAll('.time-slot:not(.disabled)');
+      slotElements.forEach(function(el) {
+        el.addEventListener('click', function() {
+          selectedTime = this.getAttribute('data-time');
+          renderTimeSlots();
+          showForm();
+        });
+      });
+    }
+
+    function showForm() {
+      document.getElementById('calendarView').classList.remove('active');
+      document.getElementById('formView').classList.add('active');
+      document.getElementById('successView').classList.remove('active');
+      
+      document.getElementById('summaryDate').textContent = formatDate(selectedDate);
+      document.getElementById('summaryTime').textContent = selectedTime;
+    }
+
+    function showCalendar() {
+      document.getElementById('calendarView').classList.add('active');
+      document.getElementById('formView').classList.remove('active');
+      document.getElementById('successView').classList.remove('active');
+    }
+
+    function showSuccess() {
+      document.getElementById('calendarView').classList.remove('active');
+      document.getElementById('formView').classList.remove('active');
+      document.getElementById('successView').classList.add('active');
+    }
+
+    // Navigation buttons
+    document.getElementById('prevMonth').addEventListener('click', function() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    });
+
+    document.getElementById('nextMonth').addEventListener('click', function() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    });
+
+    // Form buttons
+    document.getElementById('backToCalendar').addEventListener('click', function() {
+      showCalendar();
+    });
+
+    document.getElementById('confirmBooking').addEventListener('click', function() {
+      var name = document.getElementById('clientName').value.trim();
+      var phone = document.getElementById('clientPhone').value.trim();
+      
+      if (!name || !phone) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+      
+      var booking = {
+        date: formatDateKey(selectedDate),
+        time: selectedTime,
+        name: name,
+        phone: phone,
+        createdAt: new Date().toISOString()
+      };
+      
+      saveBooking(booking);
+      showSuccess();
+    });
+
+    document.getElementById('newBooking').addEventListener('click', function() {
+      selectedDate = null;
+      selectedTime = null;
+      document.getElementById('clientName').value = '';
+      document.getElementById('clientPhone').value = '';
+      document.getElementById('timeSlots').style.display = 'none';
+      renderCalendar();
+      showCalendar();
+    });
+
+    // Phone mask
+    document.getElementById('clientPhone').addEventListener('input', function(e) {
+      var value = e.target.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      
+      if (value.length > 6) {
+        e.target.value = '(' + value.slice(0, 2) + ') ' + value.slice(2, 7) + '-' + value.slice(7);
+      } else if (value.length > 2) {
+        e.target.value = '(' + value.slice(0, 2) + ') ' + value.slice(2);
+      } else if (value.length > 0) {
+        e.target.value = '(' + value;
+      }
+    });
+
+    // Testimonials
+    var currentTestimonial = 0;
+    var testimonialCards = document.querySelectorAll('.testimonial-card');
+    var totalTestimonials = testimonialCards.length;
+
+    function showTestimonial(index) {
+      testimonialCards.forEach(function(card, i) {
+        card.classList.toggle('active', i === index);
+      });
+      updateDots();
+    }
+
+    function updateDots() {
+      var dotsContainer = document.getElementById('testimonialDots');
+      var html = '';
+      for (var i = 0; i < totalTestimonials; i++) {
+        var classes = 'testimonial-dot' + (i === currentTestimonial ? ' active' : '');
+        html += '<div class="' + classes + '" data-index="' + i + '"></div>';
+      }
+      dotsContainer.innerHTML = html;
+      
+      var dots = dotsContainer.querySelectorAll('.testimonial-dot');
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          currentTestimonial = parseInt(this.getAttribute('data-index'));
+          showTestimonial(currentTestimonial);
+        });
+      });
+    }
+
+    document.getElementById('prevTestimonial').addEventListener('click', function() {
+      currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+      showTestimonial(currentTestimonial);
+    });
+
+    document.getElementById('nextTestimonial').addEventListener('click', function() {
+      currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+      showTestimonial(currentTestimonial);
+    });
+
+    // Auto-rotate testimonials
+    setInterval(function() {
+      currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+      showTestimonial(currentTestimonial);
+    }, 5000);
+
+    // Initialize
+    renderCalendar();
+    updateDots();
+  </script>
+</body>
+</html>
